@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/iv_post_image"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/view_post_simple_image_height"
         android:contentDescription="@null"
         android:scaleType="centerCrop" />
 
@@ -15,7 +15,7 @@
         android:id="@+id/tv_post_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/loading"
-        android:padding="8dp" />
+        android:padding="@dimen/global_margin_padding_small"
+        android:text="@string/loading" />
 
 </LinearLayout>

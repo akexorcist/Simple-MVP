@@ -4,4 +4,6 @@
     <dimen name="global_margin_padding">16dp</dimen>
     <dimen name="global_margin_padding_large">24dp</dimen>
 
+    <dimen name="view_post_simple_image_height">100dp</dimen>
+
 </resources>
