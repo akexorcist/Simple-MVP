@@ -1,5 +1,7 @@
 package com.akexorcist.mvpsimple.module.feed;
 
+import com.akexorcist.mvpsimple.common.BasePresenter;
+import com.akexorcist.mvpsimple.common.BaseView;
 import com.akexorcist.mvpsimple.network.model.PostList;
 
 /**
@@ -7,16 +9,16 @@ import com.akexorcist.mvpsimple.network.model.PostList;
  */
 public class FeedContractor {
 
-    public interface Presenter {
-        void loadPostList();
-    }
-
-    public interface View {
+    public interface View extends BaseView<Presenter> {
         void updatePostList(PostList postList);
 
         void showLoading();
 
         void hideLoading();
+    }
+
+    public interface Presenter extends BasePresenter {
+        void loadPostList();
     }
 
 }
