@@ -12,6 +12,9 @@ import java.util.List;
 public class PostList {
     String kind;
     String nextPageToken;
+    String etag;
+    @SerializedName("items")
+    List<Item> itemList;
 
     public class Item {
         String kind;
