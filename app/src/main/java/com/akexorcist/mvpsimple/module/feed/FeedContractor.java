@@ -10,7 +10,7 @@ import com.akexorcist.mvpsimple.network.model.PostList;
 public class FeedContractor {
 
     public interface View extends BaseView<Presenter> {
-        void updatePostList(PostList postList);
+        void updatePostList();
 
         void showLoading();
 
@@ -19,6 +19,8 @@ public class FeedContractor {
 
     public interface Presenter extends BasePresenter {
         void loadPostList();
+
+        PostList getPostList();
     }
 
 }
