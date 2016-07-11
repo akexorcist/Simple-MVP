@@ -15,6 +15,7 @@ public interface NetworkService {
     @GET(Url.GET_POST_LIST)
     Call<PostList> getPostList(@Path("blogId") String blogId,
                                @Query("key") String key,
-                               @Query("fetchBodies") boolean isFetchBodies);
+                               @Query("fetchBodies") boolean isFetchBodies,
+                               @Query("fetchImages") boolean isFetchImages);
 
 }

@@ -45,7 +45,7 @@ public class NetworkManager {
     }
 
     public void getPostList() {
-        getConnection().getPostList(Key.BLOGGER_ID, Key.BLOGGER_KEY, false).enqueue(new Callback<PostList>() {
+        getConnection().getPostList(Key.BLOGGER_ID, Key.BLOGGER_KEY, false, true).enqueue(new Callback<PostList>() {
             @Override
             public void onResponse(Call<PostList> call, Response<PostList> response) {
                 if (response.code() == 200) {
