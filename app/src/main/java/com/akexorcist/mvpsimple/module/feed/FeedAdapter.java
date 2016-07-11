@@ -44,7 +44,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private String getPostImage(PostList.Item postItem) {
         List<PostList.Image> imageList = postItem.getImageList();
-        if (imageList.size() > 0) {
+        if (imageList != null && imageList.size() > 0) {
             return imageList.get(0).getUrl();
         }
         return null;
