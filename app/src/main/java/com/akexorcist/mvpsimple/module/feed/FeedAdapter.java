@@ -35,14 +35,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (viewHolder instanceof FeedViewHolder) {
             FeedViewHolder feedViewHolder = (FeedViewHolder) viewHolder;
             PostList.Item postItem = postItemList.get(i);
-            String url = getPostImage(postItem);
+            String url = getPostImageUrl(postItem);
             String title = postItem.getTitle();
             feedViewHolder.setPostImage(url);
             feedViewHolder.setPostTitle(title);
         }
     }
 
-    private String getPostImage(PostList.Item postItem) {
+    private String getPostImageUrl(PostList.Item postItem) {
         List<PostList.Image> imageList = postItem.getImageList();
         if (imageList != null && imageList.size() > 0) {
             return imageList.get(0).getUrl();
