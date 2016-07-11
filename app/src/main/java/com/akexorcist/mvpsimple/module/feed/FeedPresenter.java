@@ -54,7 +54,7 @@ public class FeedPresenter implements FeedContractor.Presenter {
     }
 
     @Subscribe
-    public void onResultFaiureEvent(ResultFailureEvent event) {
-        Log.e("Check", "onResultFaiureEvent");
+    public void onResultFailureEvent(ResultFailureEvent event) {
+        Log.e("Check", "onResultFailureEvent");
     }
 }
