@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.akexorcist.mvpsimple.R;
 
@@ -13,6 +15,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
 
     private RecyclerView rvPostList;
     private FeedAdapter feedAdapter;
+    private LinearLayout layoutLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
 
     private void bindView() {
         rvPostList = (RecyclerView) findViewById(R.id.rv_post_list);
+        layoutLoading = (LinearLayout) findViewById(R.id.layout_loading);
     }
 
     private void setupView() {
@@ -52,12 +56,12 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
 
     @Override
     public void showLoading() {
-
+        layoutLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        layoutLoading.setVisibility(View.INVISIBLE);
     }
 
     @Override
