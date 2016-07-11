@@ -47,6 +47,11 @@ public class FeedPresenter implements FeedContractor.Presenter {
         return postList;
     }
 
+    @Override
+    public void onItemClick(PostList.Item postItem, int position) {
+        Log.e("Check", "Title : " + postItem.getTitle());
+    }
+
     @Subscribe
     public void onPostListResult(PostList postList) {
         this.postList = postList;

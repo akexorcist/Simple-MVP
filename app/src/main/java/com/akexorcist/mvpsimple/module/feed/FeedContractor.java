@@ -21,6 +21,8 @@ public class FeedContractor {
         void loadPostList();
 
         PostList getPostList();
+
+        void onItemClick(PostList.Item postItem, int position);
     }
 
 }

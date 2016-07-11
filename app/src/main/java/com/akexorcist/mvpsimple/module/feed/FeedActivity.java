@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.akexorcist.mvpsimple.R;
+import com.akexorcist.mvpsimple.network.model.PostList;
 
-public class FeedActivity extends AppCompatActivity implements FeedContractor.View {
+public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedAdapter.OnItemClickListener {
 
     private FeedContractor.Presenter feedPresenter;
 
@@ -36,6 +37,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
 
     private void setupView() {
         feedAdapter = new FeedAdapter();
+        feedAdapter.setOnItemClickListener(this);
         rvPostList.setAdapter(feedAdapter);
         rvPostList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvPostList.setVisibility(View.GONE);
@@ -106,5 +108,10 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
             public void onAnimationRepeat(Animator animator) {
             }
         });
+    }
+
+    @Override
+    public void onPostItemClick(RecyclerView.ViewHolder viewHolder, PostList.Item postItem, int i) {
+        feedPresenter.onItemClick(postItem, i);
     }
 }
