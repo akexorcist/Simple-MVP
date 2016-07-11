@@ -2,6 +2,7 @@ package com.akexorcist.mvpsimple.module.feed;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.akexorcist.mvpsimple.R;
@@ -30,6 +31,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     private void setupView() {
         feedAdapter = new FeedAdapter();
         rvPostList.setAdapter(feedAdapter);
+        rvPostList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     private void createPresenter() {
