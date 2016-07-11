@@ -4,6 +4,8 @@ import com.akexorcist.mvpsimple.bus.BusProvider;
 import com.akexorcist.mvpsimple.network.model.PostList;
 import com.akexorcist.mvpsimple.network.model.ResultFailureEvent;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,9 +29,15 @@ public class NetworkManager {
 
     private NetworkService getConnection() {
         if (networkService == null) {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+            httpClient.addInterceptor(logging);  // <-- this is the important line!
+
             Retrofit retrofit = new Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl(Url.BASE)
+                    .client(httpClient.build())
                     .build();
             networkService = retrofit.create(NetworkService.class);
         }
@@ -37,10 +45,14 @@ public class NetworkManager {
     }
 
     public void getPostList() {
-        getConnection().getPostList(Key.BLOGGER_ID, Key.BLOGGER_KEY).enqueue(new Callback<PostList>() {
+        getConnection().getPostList(Key.BLOGGER_ID, Key.BLOGGER_KEY, false).enqueue(new Callback<PostList>() {
             @Override
             public void onResponse(Call<PostList> call, Response<PostList> response) {
-                BusProvider.getProvider().getBus().post(response);
+                if (response.code() == 200) {
+                    BusProvider.getProvider().getBus().post(response.body());
+                } else {
+                    BusProvider.getProvider().getBus().post(response.raw());
+                }
             }
 
             @Override
