@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<PostList.Item> postItemList;
+    private OnItemClickListener onItemClickListener;
 
     public FeedAdapter() {
     }
@@ -33,12 +34,21 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof FeedViewHolder) {
-            FeedViewHolder feedViewHolder = (FeedViewHolder) viewHolder;
-            PostList.Item postItem = postItemList.get(i);
+            final FeedViewHolder feedViewHolder = (FeedViewHolder) viewHolder;
+            final PostList.Item postItem = postItemList.get(i);
+            final int position = viewHolder.getAdapterPosition();
             String url = getPostImageUrl(postItem);
             String title = postItem.getTitle();
             feedViewHolder.setPostImage(url);
             feedViewHolder.setPostTitle(title);
+            feedViewHolder.setOnItemClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onPostItemClick(feedViewHolder, postItem, position);
+                    }
+                }
+            });
         }
     }
 
@@ -50,8 +60,16 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return null;
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
     @Override
     public int getItemCount() {
         return (postItemList != null) ? postItemList.size() : 0;
+    }
+
+    public interface OnItemClickListener {
+        void onPostItemClick(RecyclerView.ViewHolder viewHolder, PostList.Item postItem, int i);
     }
 }
