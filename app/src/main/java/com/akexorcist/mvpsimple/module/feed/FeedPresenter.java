@@ -28,7 +28,7 @@ public class FeedPresenter implements FeedContractor.Presenter {
     @Override
     public void loadPostList() {
         NetworkManager.getInstance().getPostList();
-        Log.e("Check", "loadPostList");
+        viewFeedContractor.showLoading();
     }
 
     @Override
@@ -51,6 +51,7 @@ public class FeedPresenter implements FeedContractor.Presenter {
     public void onPostListResult(PostList postList) {
         this.postList = postList;
         viewFeedContractor.updatePostList();
+        viewFeedContractor.hideLoading();
     }
 
     @Subscribe
