@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/global_margin_padding_small">
+    android:layout_margin="@dimen/global_margin_padding_small"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/iv_post_image"
