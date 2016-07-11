@@ -9,8 +9,8 @@
     android:paddingTop="@dimen/global_margin_padding"
     tools:context=".module.feed.FeedActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/rv_post_list"/>
 </RelativeLayout>
