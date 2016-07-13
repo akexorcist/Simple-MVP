@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -30,8 +31,10 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         setupView();
         createPresenter();
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             restoreView(savedInstanceState);
+        } else {
+            initialize();
         }
     }
 
@@ -45,8 +48,6 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         feedAdapter.setOnItemClickListener(this);
         rvPostList.setAdapter(feedAdapter);
         rvPostList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rvPostList.setVisibility(View.GONE);
-        layoutLoading.setVisibility(View.VISIBLE);
     }
 
     private void createPresenter() {
@@ -54,7 +55,15 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     private void restoreView(Bundle savedInstanceState) {
-        feedPresenter.setPostList((PostList) Parcels.unwrap(savedInstanceState.getParcelable(KEY_POST_LIST)));
+        Log.e("Check", "restoreView");
+        feedPresenter.setPostList((PostList) Parcels.unwrap(savedInstanceState.getParcelable(KEY_POST_LIST)), true);
+        updatePostList();
+        hideLoading(true);
+    }
+
+    private void initialize() {
+        feedPresenter.loadPostList();
+        showLoading(true);
     }
 
     @Override
@@ -75,15 +84,15 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     @Override
-    public void showLoading() {
-        applyViewFadeIn(layoutLoading);
-        applyViewFadeOut(rvPostList);
+    public void showLoading(boolean noAnimation) {
+        applyViewFadeIn(layoutLoading, noAnimation);
+        applyViewFadeOut(rvPostList, noAnimation);
     }
 
     @Override
-    public void hideLoading() {
-        applyViewFadeOut(layoutLoading);
-        applyViewFadeIn(rvPostList);
+    public void hideLoading(boolean noAnimation) {
+        applyViewFadeOut(layoutLoading, noAnimation);
+        applyViewFadeIn(rvPostList, noAnimation);
     }
 
     @Override
@@ -91,12 +100,14 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         this.feedPresenter = presenter;
     }
 
-    private void applyViewFadeIn(View view) {
-        AnimationManager.getInstance().applyViewFadeIn(view);
+    private void applyViewFadeIn(View view, boolean noAnimation) {
+        long duration = feedPresenter.getAnimationDuration(noAnimation);
+        AnimationManager.getInstance().applyViewFadeIn(view, duration);
     }
 
-    private void applyViewFadeOut(final View view) {
-        AnimationManager.getInstance().applyViewFadeOut(view);
+    private void applyViewFadeOut(final View view, boolean noAnimation) {
+        long duration = feedPresenter.getAnimationDuration(noAnimation);
+        AnimationManager.getInstance().applyViewFadeOut(view, duration);
     }
 
     @Override

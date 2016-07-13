@@ -28,13 +28,12 @@ public class FeedPresenter implements FeedContractor.Presenter {
     @Override
     public void loadPostList() {
         NetworkManager.getInstance().getPostList();
-        viewFeedContractor.showLoading();
+        viewFeedContractor.showLoading(true);
     }
 
     @Override
     public void start() {
         BusProvider.getProvider().getBus().register(this);
-        loadPostList();
     }
 
     @Override
@@ -48,10 +47,8 @@ public class FeedPresenter implements FeedContractor.Presenter {
     }
 
     @Override
-    public void setPostList(PostList postList) {
+    public void setPostList(PostList postList, boolean noAnimation) {
         this.postList = postList;
-        viewFeedContractor.updatePostList();
-        viewFeedContractor.hideLoading();
     }
 
     @Override
@@ -59,9 +56,16 @@ public class FeedPresenter implements FeedContractor.Presenter {
         Log.e("Check", "Title : " + postItem.getTitle());
     }
 
+    @Override
+    public long getAnimationDuration(boolean noAnimation) {
+        return noAnimation ? 0 : -1;
+    }
+
     @Subscribe
     public void onPostListResult(PostList postList) {
-        setPostList(postList);
+        setPostList(postList, false);
+        viewFeedContractor.updatePostList();
+        viewFeedContractor.hideLoading(false);
     }
 
     @Subscribe

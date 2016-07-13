@@ -12,9 +12,9 @@ public class FeedContractor {
     public interface View extends BaseView<Presenter> {
         void updatePostList();
 
-        void showLoading();
+        void showLoading(boolean noAnimation);
 
-        void hideLoading();
+        void hideLoading(boolean noAnimation);
     }
 
     public interface Presenter extends BasePresenter {
@@ -22,9 +22,11 @@ public class FeedContractor {
 
         PostList getPostList();
 
-        void setPostList(PostList postList);
+        void setPostList(PostList postList, boolean noAnimation);
 
         void onItemClick(PostList.Item postItem, int position);
+
+        long getAnimationDuration(boolean noAnimation);
     }
 
 }
