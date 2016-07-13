@@ -59,9 +59,9 @@ public class FeedPresenter implements FeedContractor.Presenter {
     public void setPostList(PostList postList, boolean noAnimation) {
         if (postList != null) {
             this.postList = postList;
-            viewFeedContractor.hideLoading(true);
+            viewFeedContractor.hideLoading(noAnimation);
         } else {
-            viewFeedContractor.showLoading(true);
+            viewFeedContractor.showLoading(noAnimation);
         }
     }
 
