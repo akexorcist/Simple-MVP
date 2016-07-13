@@ -16,8 +16,8 @@ public class FeedPresenter implements FeedContractor.Presenter {
     private final FeedContractor.View viewFeedContractor;
     private PostList postList;
 
-    public static void createPresenter(FeedContractor.View viewFeedContractor) {
-        new FeedPresenter(viewFeedContractor);
+    public static FeedPresenter createPresenter(FeedContractor.View viewFeedContractor) {
+        return new FeedPresenter(viewFeedContractor);
     }
 
     private FeedPresenter(FeedContractor.View viewFeedContractor) {
