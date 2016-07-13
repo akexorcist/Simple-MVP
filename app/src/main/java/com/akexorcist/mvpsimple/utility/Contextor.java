@@ -15,7 +15,7 @@ public class Contextor {
         return contextor;
     }
 
-    public Context context;
+    private Context context;
 
     public Context getContext() {
         return context;
