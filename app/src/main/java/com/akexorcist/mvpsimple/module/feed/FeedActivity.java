@@ -2,8 +2,8 @@ package com.akexorcist.mvpsimple.module.feed;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -48,7 +48,8 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         feedAdapter = new FeedAdapter();
         feedAdapter.setOnItemClickListener(this);
         rvPostList.setAdapter(feedAdapter);
-        rvPostList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        int columnCount = getResources().getInteger(R.integer.post_list_column_count);
+        rvPostList.setLayoutManager(new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL));
     }
 
     private void createPresenter() {
