@@ -12,6 +12,10 @@ public class FeedContractor {
     public interface View extends BaseView<Presenter> {
         void updatePostList();
 
+        void showPostListLoadingFailure();
+
+        void showSelectedPostTitle(String title);
+
         void showLoading(boolean noAnimation);
 
         void hideLoading(boolean noAnimation);

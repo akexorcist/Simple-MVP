@@ -1,7 +1,5 @@
 package com.akexorcist.mvpsimple.module.feed;
 
-import android.util.Log;
-
 import com.akexorcist.mvpsimple.bus.BusProvider;
 import com.akexorcist.mvpsimple.network.NetworkManager;
 import com.akexorcist.mvpsimple.network.model.PostList;
@@ -53,7 +51,8 @@ public class FeedPresenter implements FeedContractor.Presenter {
 
     @Override
     public void onItemClick(PostList.Item postItem, int position) {
-        Log.e("Check", "Title : " + postItem.getTitle());
+        String title = postItem.getTitle();
+        viewFeedContractor.showSelectedPostTitle(title);
     }
 
     @Override
@@ -70,6 +69,6 @@ public class FeedPresenter implements FeedContractor.Presenter {
 
     @Subscribe
     public void onResultFailureEvent(ResultFailureEvent event) {
-        Log.e("Check", "onResultFailureEvent");
+        viewFeedContractor.showPostListLoadingFailure();
     }
 }

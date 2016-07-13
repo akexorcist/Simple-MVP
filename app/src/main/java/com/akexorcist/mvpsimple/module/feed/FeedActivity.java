@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.akexorcist.mvpsimple.R;
 import com.akexorcist.mvpsimple.network.model.PostList;
@@ -81,6 +82,16 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     @Override
     public void updatePostList() {
         feedAdapter.setPostItemList(feedPresenter.getPostList().getItemList());
+    }
+
+    @Override
+    public void showPostListLoadingFailure() {
+        Toast.makeText(this, R.string.service_unavailable, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showSelectedPostTitle(String title) {
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }
 
     @Override
