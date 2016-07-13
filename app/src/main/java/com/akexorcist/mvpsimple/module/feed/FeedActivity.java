@@ -11,8 +11,10 @@ import com.akexorcist.mvpsimple.R;
 import com.akexorcist.mvpsimple.network.model.PostList;
 import com.akexorcist.mvpsimple.utility.AnimationManager;
 
-public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedAdapter.OnItemClickListener {
+import org.parceler.Parcels;
 
+public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedAdapter.OnItemClickListener {
+    private static final String KEY_POST_LIST = "key_post_list";
     private FeedContractor.Presenter feedPresenter;
 
     private RecyclerView rvPostList;
@@ -27,6 +29,10 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         bindView();
         setupView();
         createPresenter();
+
+        if(savedInstanceState != null) {
+            restoreView(savedInstanceState);
+        }
     }
 
     private void bindView() {
@@ -45,6 +51,16 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
 
     private void createPresenter() {
         FeedPresenter.createPresenter(this);
+    }
+
+    private void restoreView(Bundle savedInstanceState) {
+        feedPresenter.setPostList((PostList) Parcels.unwrap(savedInstanceState.getParcelable(KEY_POST_LIST)));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(KEY_POST_LIST, Parcels.wrap(feedPresenter.getPostList()));
     }
 
     @Override
