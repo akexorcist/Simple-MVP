@@ -54,7 +54,7 @@ public class PostList {
     }
 
     @Parcel
-    public class Item {
+    public static class Item {
         String kind;
         String id;
         Blog blog;
@@ -181,7 +181,7 @@ public class PostList {
     }
 
     @Parcel
-    public class Blog {
+    public static class Blog {
         String id;
 
         public Blog() {
@@ -197,7 +197,7 @@ public class PostList {
     }
 
     @Parcel
-    public class Image {
+    public static class Image {
         String url;
 
         public Image() {
@@ -213,7 +213,7 @@ public class PostList {
     }
 
     @Parcel
-    public class Author {
+    public static class Author {
         String id;
         String displayName;
         String url;
@@ -257,7 +257,7 @@ public class PostList {
     }
 
     @Parcel
-    public class Reply {
+    public static class Reply {
         String totalItems;
         String selfLink;
 
