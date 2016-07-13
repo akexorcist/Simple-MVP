@@ -1,7 +1,5 @@
 package com.akexorcist.mvpsimple.module.feed;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.akexorcist.mvpsimple.R;
 import com.akexorcist.mvpsimple.network.model.PostList;
+import com.akexorcist.mvpsimple.utility.AnimationManager;
 
 public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedAdapter.OnItemClickListener {
 
@@ -52,7 +51,6 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     protected void onResume() {
         super.onResume();
         feedPresenter.start();
-
     }
 
     @Override
@@ -64,14 +62,12 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     public void showLoading() {
         applyViewFadeIn(layoutLoading);
         applyViewFadeOut(rvPostList);
-//        layoutLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
         applyViewFadeOut(layoutLoading);
         applyViewFadeIn(rvPostList);
-//        layoutLoading.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -80,34 +76,11 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     private void applyViewFadeIn(View view) {
-        Animator fadeInAnimator = AnimatorInflater.loadAnimator(this, R.animator.animator_fade_in);
-        fadeInAnimator.setTarget(view);
-        fadeInAnimator.start();
-        view.setVisibility(View.VISIBLE);
+        AnimationManager.getInstance().applyViewFadeIn(view);
     }
 
     private void applyViewFadeOut(final View view) {
-        Animator fadeInAnimator = AnimatorInflater.loadAnimator(this, R.animator.animator_fade_out);
-        fadeInAnimator.setTarget(view);
-        fadeInAnimator.start();
-        fadeInAnimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                view.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-            }
-        });
+        AnimationManager.getInstance().applyViewFadeOut(view);
     }
 
     @Override
