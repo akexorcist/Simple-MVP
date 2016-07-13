@@ -24,14 +24,28 @@ public class AnimationManager {
     }
 
     public void applyViewFadeIn(View view) {
+        applyViewFadeOut(view, -1);
+    }
+
+    public void applyViewFadeIn(View view, long duration) {
         Animator fadeInAnimator = AnimatorInflater.loadAnimator(Contextor.getInstance().getContext(), R.animator.animator_fade_in);
+        if(duration >= 0) {
+            fadeInAnimator.setDuration(duration);
+        }
         fadeInAnimator.setTarget(view);
         fadeInAnimator.start();
         view.setVisibility(View.VISIBLE);
     }
 
-    public void applyViewFadeOut(final View view) {
+    public void applyViewFadeOut(View view) {
+        applyViewFadeOut(view, -1);
+    }
+
+    public void applyViewFadeOut(final View view, long duration) {
         Animator fadeInAnimator = AnimatorInflater.loadAnimator(Contextor.getInstance().getContext(), R.animator.animator_fade_out);
+        if(duration >= 0) {
+            fadeInAnimator.setDuration(duration);
+        }
         fadeInAnimator.setTarget(view);
         fadeInAnimator.start();
         fadeInAnimator.addListener(new Animator.AnimatorListener() {
