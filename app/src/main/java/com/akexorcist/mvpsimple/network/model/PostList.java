@@ -2,13 +2,15 @@ package com.akexorcist.mvpsimple.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
 /**
  * Created by Akexorcist on 7/10/16 AD.
  */
 
-
+@Parcel
 public class PostList {
     String kind;
     String nextPageToken;
@@ -51,6 +53,7 @@ public class PostList {
         this.itemList = itemList;
     }
 
+    @Parcel
     public class Item {
         String kind;
         String id;
@@ -177,6 +180,7 @@ public class PostList {
         }
     }
 
+    @Parcel
     public class Blog {
         String id;
 
@@ -192,6 +196,7 @@ public class PostList {
         }
     }
 
+    @Parcel
     public class Image {
         String url;
 
@@ -207,6 +212,7 @@ public class PostList {
         }
     }
 
+    @Parcel
     public class Author {
         String id;
         String displayName;
@@ -250,6 +256,7 @@ public class PostList {
         }
     }
 
+    @Parcel
     public class Reply {
         String totalItems;
         String selfLink;
