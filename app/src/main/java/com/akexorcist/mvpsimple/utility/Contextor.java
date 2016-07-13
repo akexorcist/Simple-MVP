@@ -22,6 +22,6 @@ public class Contextor {
     }
 
     public void setContext(Context context) {
-        this.context = context;
+        this.context = context.getApplicationContext();
     }
 }
