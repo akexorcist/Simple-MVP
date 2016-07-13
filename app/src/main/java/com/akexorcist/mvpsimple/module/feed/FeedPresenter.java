@@ -50,6 +50,8 @@ public class FeedPresenter implements FeedContractor.Presenter {
     @Override
     public void setPostList(PostList postList) {
         this.postList = postList;
+        viewFeedContractor.updatePostList();
+        viewFeedContractor.hideLoading();
     }
 
     @Override
@@ -60,8 +62,6 @@ public class FeedPresenter implements FeedContractor.Presenter {
     @Subscribe
     public void onPostListResult(PostList postList) {
         setPostList(postList);
-        viewFeedContractor.updatePostList();
-        viewFeedContractor.hideLoading();
     }
 
     @Subscribe
