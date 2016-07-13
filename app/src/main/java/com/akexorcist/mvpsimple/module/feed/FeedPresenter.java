@@ -47,6 +47,7 @@ public class FeedPresenter implements FeedContractor.Presenter {
         return postList;
     }
 
+    @Override
     public void setPostList(PostList postList) {
         this.postList = postList;
     }
