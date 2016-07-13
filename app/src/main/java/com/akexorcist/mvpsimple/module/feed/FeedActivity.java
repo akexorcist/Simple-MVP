@@ -81,7 +81,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
 
     @Override
     public void updatePostList() {
-        feedAdapter.setPostItemList(feedPresenter.getPostList().getItemList());
+        feedAdapter.setPostItemList(feedPresenter.getPostItemList());
     }
 
     @Override

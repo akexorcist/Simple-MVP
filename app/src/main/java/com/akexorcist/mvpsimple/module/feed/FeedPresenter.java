@@ -6,6 +6,8 @@ import com.akexorcist.mvpsimple.network.model.PostList;
 import com.akexorcist.mvpsimple.network.model.ResultFailureEvent;
 import com.squareup.otto.Subscribe;
 
+import java.util.List;
+
 /**
  * Created by Akexorcist on 7/10/16 AD.
  */
@@ -37,6 +39,11 @@ public class FeedPresenter implements FeedContractor.Presenter {
     @Override
     public void stop() {
         BusProvider.getProvider().getBus().unregister(this);
+    }
+
+    @Override
+    public List<PostList.Item> getPostItemList() {
+        return postList != null ? postList.getItemList() : null;
     }
 
     @Override
