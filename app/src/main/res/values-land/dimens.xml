@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="view_post_simple_image_height">120dp</dimen>
+
+</resources>
