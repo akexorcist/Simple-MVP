@@ -33,7 +33,11 @@ public class FeedPresenter implements FeedContractor.Presenter {
 
     @Override
     public void start() {
-        BusProvider.getProvider().getBus().register(this);
+        try {
+            BusProvider.getProvider().getBus().register(this);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -53,7 +57,12 @@ public class FeedPresenter implements FeedContractor.Presenter {
 
     @Override
     public void setPostList(PostList postList, boolean noAnimation) {
-        this.postList = postList;
+        if (postList != null) {
+            this.postList = postList;
+            viewFeedContractor.hideLoading(true);
+        } else {
+            viewFeedContractor.showLoading(true);
+        }
     }
 
     @Override
@@ -71,7 +80,6 @@ public class FeedPresenter implements FeedContractor.Presenter {
     public void onPostListResult(PostList postList) {
         setPostList(postList, false);
         viewFeedContractor.updatePostList();
-        viewFeedContractor.hideLoading(false);
     }
 
     @Subscribe

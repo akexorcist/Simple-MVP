@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -37,6 +36,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         } else {
             initialize();
         }
+        feedPresenter.start();
     }
 
     private void bindView() {
@@ -56,15 +56,12 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     private void restoreView(Bundle savedInstanceState) {
-        Log.e("Check", "restoreView");
         feedPresenter.setPostList((PostList) Parcels.unwrap(savedInstanceState.getParcelable(KEY_POST_LIST)), true);
         updatePostList();
-        hideLoading(true);
     }
 
     private void initialize() {
         feedPresenter.loadPostList();
-        showLoading(true);
     }
 
     @Override
@@ -77,6 +74,13 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     protected void onResume() {
         super.onResume();
         feedPresenter.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        feedPresenter.stop();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.akexorcist.mvpsimple.network;
 
+import android.os.Handler;
+
 import com.akexorcist.mvpsimple.bus.BusProvider;
 import com.akexorcist.mvpsimple.network.model.PostList;
 import com.akexorcist.mvpsimple.network.model.ResultFailureEvent;
@@ -47,12 +49,17 @@ public class NetworkManager {
     public void getPostList() {
         getConnection().getPostList(Key.BLOGGER_ID, Key.BLOGGER_KEY, false, true).enqueue(new Callback<PostList>() {
             @Override
-            public void onResponse(Call<PostList> call, Response<PostList> response) {
-                if (response.code() == 200) {
-                    BusProvider.getProvider().getBus().post(response.body());
-                } else {
-                    BusProvider.getProvider().getBus().post(response.raw());
-                }
+            public void onResponse(Call<PostList> call, final Response<PostList> response) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response.code() == 200) {
+                            BusProvider.getProvider().getBus().post(response.body());
+                        } else {
+                            BusProvider.getProvider().getBus().post(response.raw());
+                        }
+                    }
+                }, 2000);
             }
 
             @Override
