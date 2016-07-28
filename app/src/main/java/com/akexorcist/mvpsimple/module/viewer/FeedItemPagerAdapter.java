@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.akexorcist.mvpsimple.module.viewer.header.FeedHeaderFragment;
 import com.akexorcist.mvpsimple.module.viewer.info.FeedInfoFragment;
+import com.akexorcist.mvpsimple.module.viewer.link.FeedLinkFragment;
 import com.akexorcist.mvpsimple.module.viewer.loading.FeedLoadingFragment;
 import com.akexorcist.mvpsimple.network.model.PostList;
 
@@ -31,12 +32,16 @@ public class FeedItemPagerAdapter extends FragmentStatePagerAdapter {
             return FeedHeaderFragment.newInstance(postItem);
         } else if (position == 2) {
             return FeedLoadingFragment.newInstance();
+        } else if (position == 3) {
+            return FeedLoadingFragment.newInstance();
+        } else if (position == 4) {
+            return FeedLinkFragment.newInstance(postItem);
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 5;
     }
 }
