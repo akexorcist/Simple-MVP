@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.akexorcist.mvpsimple.R;
+import com.akexorcist.mvpsimple.module.viewer.adapter.FeedItemAdapter;
 import com.akexorcist.mvpsimple.network.model.PostList;
 
 import org.parceler.Parcels;
@@ -17,7 +18,7 @@ public class ViewerActivity extends AppCompatActivity implements ViewerContracto
     private Button btnNext;
     private Button btnPrevious;
     private ViewPager vpFeedViewer;
-    private FeedItemPagerAdapter feedItemPagerAdapter;
+    private FeedItemAdapter feedItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class ViewerActivity extends AppCompatActivity implements ViewerContracto
     }
 
     private void restoreView() {
-        vpFeedViewer.setAdapter(feedItemPagerAdapter);
+        vpFeedViewer.setAdapter(feedItemAdapter);
     }
 
     @Override
@@ -66,12 +67,14 @@ public class ViewerActivity extends AppCompatActivity implements ViewerContracto
     public void onResume() {
         super.onResume();
         presenterViewerContractor.start();
+        feedItemAdapter.onStart();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         presenterViewerContractor.stop();
+        feedItemAdapter.onStop();
     }
 
     public void bindView() {
@@ -84,7 +87,7 @@ public class ViewerActivity extends AppCompatActivity implements ViewerContracto
         btnNext.setOnClickListener(this);
         btnPrevious.setOnClickListener(this);
 
-        feedItemPagerAdapter = new FeedItemPagerAdapter(getSupportFragmentManager());
+        feedItemAdapter = new FeedItemAdapter(getSupportFragmentManager());
 //        vpFeedViewer.setAdapter(feedItemPagerAdapter);
     }
 
@@ -104,7 +107,7 @@ public class ViewerActivity extends AppCompatActivity implements ViewerContracto
 
     @Override
     public void setFeedItemAdapter(final PostList.Item postItem) {
-        feedItemPagerAdapter.setPostItem(postItem);
-        vpFeedViewer.setAdapter(feedItemPagerAdapter);
+        feedItemAdapter.setPostItem(postItem);
+        vpFeedViewer.setAdapter(feedItemAdapter);
     }
 }

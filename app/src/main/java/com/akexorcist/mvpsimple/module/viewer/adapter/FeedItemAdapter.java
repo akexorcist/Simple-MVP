@@ -1,4 +1,4 @@
-package com.akexorcist.mvpsimple.module.viewer;
+package com.akexorcist.mvpsimple.module.viewer.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,15 +13,29 @@ import com.akexorcist.mvpsimple.network.model.PostList;
 /**
  * Created by Akexorcist on 7/28/16 AD.
  */
-public class FeedItemPagerAdapter extends FragmentStatePagerAdapter {
+public class FeedItemAdapter extends FragmentStatePagerAdapter implements FeedItemContractor.View {
+    private FeedItemContractor.Presenter presenterFeedItemContractor;
     private PostList.Item postItem;
 
-    public FeedItemPagerAdapter(FragmentManager fm) {
+    public FeedItemAdapter(FragmentManager fm) {
         super(fm);
+        createPresenter();
+    }
+
+    public void createPresenter() {
+        FeedItemPresenter.createPresenter(this);
     }
 
     public void setPostItem(PostList.Item postItem) {
         this.postItem = postItem;
+    }
+
+    public void onStart() {
+        presenterFeedItemContractor.start();
+    }
+
+    public void onStop() {
+        presenterFeedItemContractor.stop();
     }
 
     @Override
@@ -40,8 +54,14 @@ public class FeedItemPagerAdapter extends FragmentStatePagerAdapter {
         return null;
     }
 
+
     @Override
     public int getCount() {
         return 5;
+    }
+
+    @Override
+    public void setPresenter(FeedItemContractor.Presenter presenter) {
+        this.presenterFeedItemContractor = presenter;
     }
 }
