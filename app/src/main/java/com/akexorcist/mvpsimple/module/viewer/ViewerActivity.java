@@ -110,4 +110,14 @@ public class ViewerActivity extends AppCompatActivity implements ViewerContracto
         feedItemAdapter.setPostItem(postItem);
         vpFeedViewer.setAdapter(feedItemAdapter);
     }
+
+    @Override
+    public void nextFeedItem() {
+        vpFeedViewer.setCurrentItem(vpFeedViewer.getCurrentItem() + 1);
+    }
+
+    @Override
+    public void previousFeedItem() {
+        vpFeedViewer.setCurrentItem(vpFeedViewer.getCurrentItem() - 1);
+    }
 }

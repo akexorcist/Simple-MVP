@@ -11,6 +11,10 @@ public class ViewerContractor {
 
     public interface View extends BaseView<Presenter> {
         void setFeedItemAdapter(PostList.Item postItem);
+
+        void nextFeedItem();
+
+        void previousFeedItem();
     }
 
     public interface Presenter extends BasePresenter {

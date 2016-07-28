@@ -39,11 +39,11 @@ public class ViewerPresenter implements ViewerContractor.Presenter {
 
     @Override
     public void onButtonNextClicked() {
-
+        viewViewerContractor.nextFeedItem();
     }
 
     @Override
     public void onButtonPreviousClicked() {
-
+        viewViewerContractor.previousFeedItem();
     }
 }
