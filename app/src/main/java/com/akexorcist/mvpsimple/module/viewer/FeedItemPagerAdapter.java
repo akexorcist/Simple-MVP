@@ -27,7 +27,7 @@ public class FeedItemPagerAdapter extends FragmentStatePagerAdapter {
         if (position == 0) {
             return FeedInfoFragment.newInstance(postItem);
         } else if (position == 1) {
-            return FeedHeaderFragment.newInstance();
+            return FeedHeaderFragment.newInstance(postItem);
         }
         return null;
     }
