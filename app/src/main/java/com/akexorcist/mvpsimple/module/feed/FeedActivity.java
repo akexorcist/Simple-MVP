@@ -1,5 +1,6 @@
 package com.akexorcist.mvpsimple.module.feed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.akexorcist.mvpsimple.R;
+import com.akexorcist.mvpsimple.module.viewer.ViewerActivity;
 import com.akexorcist.mvpsimple.network.model.PostList;
 import com.akexorcist.mvpsimple.utility.AnimationManager;
 
@@ -32,11 +34,11 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         createPresenter();
 
         if (savedInstanceState != null) {
-            restoreView(savedInstanceState);
+            restoreInstanceState(savedInstanceState);
+            restoreView();
         } else {
             initialize();
         }
-        feedPresenter.start();
     }
 
     private void bindView() {
@@ -56,8 +58,11 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         FeedPresenter.createPresenter(this);
     }
 
-    private void restoreView(Bundle savedInstanceState) {
+    private void restoreInstanceState(Bundle savedInstanceState) {
         feedPresenter.setPostList((PostList) Parcels.unwrap(savedInstanceState.getParcelable(KEY_POST_LIST)), true);
+    }
+
+    private void restoreView() {
         updatePostList();
     }
 
@@ -95,11 +100,6 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     @Override
-    public void showSelectedPostTitle(String title) {
-        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void showLoading(boolean noAnimation) {
         applyViewFadeIn(layoutLoading, noAnimation);
         applyViewFadeOut(rvPostList, noAnimation);
@@ -109,6 +109,13 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     public void hideLoading(boolean noAnimation) {
         applyViewFadeOut(layoutLoading, noAnimation);
         applyViewFadeIn(rvPostList, noAnimation);
+    }
+
+    @Override
+    public void goToFeedViewerActivity(PostList.Item postItem) {
+        Intent intent = new Intent(this, ViewerActivity.class);
+        intent.putExtra(ViewerActivity.KEY_POST_ITEM, Parcels.wrap(postItem));
+        startActivity(intent);
     }
 
     @Override

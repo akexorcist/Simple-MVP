@@ -16,11 +16,11 @@ public class FeedContractor {
 
         void showPostListLoadingFailure();
 
-        void showSelectedPostTitle(String title);
-
         void showLoading(boolean noAnimation);
 
         void hideLoading(boolean noAnimation);
+
+        void goToFeedViewerActivity(PostList.Item postItem);
     }
 
     public interface Presenter extends BasePresenter {

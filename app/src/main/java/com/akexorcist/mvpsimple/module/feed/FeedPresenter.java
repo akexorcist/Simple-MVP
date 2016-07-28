@@ -67,8 +67,7 @@ public class FeedPresenter implements FeedContractor.Presenter {
 
     @Override
     public void onItemClick(PostList.Item postItem, int position) {
-        String title = postItem.getTitle();
-        viewFeedContractor.showSelectedPostTitle(title);
+        viewFeedContractor.goToFeedViewerActivity(postItem);
     }
 
     @Override
