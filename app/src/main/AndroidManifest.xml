@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.viewer.ViewerActivity" />
+        <activity android:name=".module.writer.WriterInfoActivity" />
     </application>
 
 </manifest>

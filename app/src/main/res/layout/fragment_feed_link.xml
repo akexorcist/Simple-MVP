@@ -4,34 +4,34 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="50dp"
+    android:padding="@dimen/global_margin_padding_extra_large"
     tools:context="com.akexorcist.mvpsimple.module.viewer.link.FeedLinkFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Post ID"
-        android:textSize="18sp" />
+        android:textSize="@dimen/global_text_size_large" />
 
     <TextView
         android:id="@+id/tv_post_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loading"
-        android:textSize="14sp" />
+        android:textSize="@dimen/global_text_size_small" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/global_margin_padding_large"
         android:text="Post URL"
-        android:textSize="18sp" />
+        android:textSize="@dimen/global_text_size_large" />
 
     <TextView
         android:id="@+id/tv_post_url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loading"
-        android:textSize="14sp" />
+        android:textSize="@dimen/global_text_size_small" />
 
 </LinearLayout>

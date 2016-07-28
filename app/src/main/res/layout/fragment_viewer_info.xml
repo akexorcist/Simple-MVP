@@ -9,7 +9,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/global_margin_padding_large"
         android:gravity="center"
         android:text="Viewer Info Fragment" />
 
