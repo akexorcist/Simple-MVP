@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Post ID"
+        android:text="@string/post_id"
         android:textSize="@dimen/global_text_size_large" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/global_margin_padding_large"
-        android:text="Post URL"
+        android:text="@string/post_url"
         android:textSize="@dimen/global_text_size_large" />
 
     <TextView
