@@ -10,18 +10,19 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.akexorcist.mvpsimple.R;
+import com.akexorcist.mvpsimple.module.feed.adapter.FeedListAdapter;
 import com.akexorcist.mvpsimple.module.viewer.ViewerActivity;
 import com.akexorcist.mvpsimple.network.model.PostList;
 import com.akexorcist.mvpsimple.utility.AnimationManager;
 
 import org.parceler.Parcels;
 
-public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedAdapter.OnItemClickListener {
+public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedListAdapter.OnItemClickListener {
     private static final String KEY_POST_LIST = "key_post_list";
     private FeedContractor.Presenter feedPresenter;
 
     private RecyclerView rvPostList;
-    private FeedAdapter feedAdapter;
+    private FeedListAdapter feedListAdapter;
     private LinearLayout layoutLoading;
 
     @Override
@@ -37,6 +38,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
             restoreInstanceState(savedInstanceState);
             restoreView();
         } else {
+            restoreArgument(getIntent().getExtras());
             initialize();
         }
     }
@@ -47,9 +49,9 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     private void setupView() {
-        feedAdapter = new FeedAdapter();
-        feedAdapter.setOnItemClickListener(this);
-        rvPostList.setAdapter(feedAdapter);
+        feedListAdapter = new FeedListAdapter();
+        feedListAdapter.setOnItemClickListener(this);
+        rvPostList.setAdapter(feedListAdapter);
         int columnCount = getResources().getInteger(R.integer.post_list_column_count);
         rvPostList.setLayoutManager(new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL));
     }
@@ -66,6 +68,10 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         updatePostList();
     }
 
+    private void restoreArgument(Bundle extras) {
+
+    }
+
     private void initialize() {
         feedPresenter.loadPostList();
     }
@@ -80,18 +86,19 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     protected void onResume() {
         super.onResume();
         feedPresenter.start();
+        feedListAdapter.onStart();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
         feedPresenter.stop();
+        feedListAdapter.onStop();
     }
 
     @Override
     public void updatePostList() {
-        feedAdapter.setPostItemList(feedPresenter.getPostItemList());
+        feedListAdapter.setPostItemList(feedPresenter.getPostItemList());
     }
 
     @Override

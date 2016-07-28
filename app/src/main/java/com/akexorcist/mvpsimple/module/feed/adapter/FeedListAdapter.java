@@ -1,4 +1,4 @@
-package com.akexorcist.mvpsimple.module.feed;
+package com.akexorcist.mvpsimple.module.feed.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.akexorcist.mvpsimple.R;
+import com.akexorcist.mvpsimple.module.feed.FeedViewHolder;
 import com.akexorcist.mvpsimple.network.model.PostList;
 
 import java.util.List;
@@ -13,18 +14,24 @@ import java.util.List;
 /**
  * Created by Akexorcist on 7/10/16 AD.
  */
-public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<PostList.Item> postItemList;
+public class FeedListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements FeedListContractor.View {
+    private FeedListContractor.Presenter presenterFeedListContractor;
     private OnItemClickListener onItemClickListener;
 
-    public FeedAdapter() {
+    public FeedListAdapter() {
+        FeedListPresenter.createPresenter(this);
     }
 
     public void setPostItemList(List<PostList.Item> postItemList) {
-        if (postItemList != null) {
-            this.postItemList = postItemList;
-            notifyDataSetChanged();
-        }
+        presenterFeedListContractor.setPostItemList(postItemList);
+    }
+
+    public void onStart() {
+        presenterFeedListContractor.start();
+    }
+
+    public void onStop() {
+        presenterFeedListContractor.stop();
     }
 
     @Override
@@ -37,29 +44,21 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof FeedViewHolder) {
             final FeedViewHolder feedViewHolder = (FeedViewHolder) viewHolder;
-            final PostList.Item postItem = postItemList.get(i);
             final int position = viewHolder.getAdapterPosition();
-            String url = getPostImageUrl(postItem);
-            String title = postItem.getTitle();
+            String url = presenterFeedListContractor.getPostItemImageUrlByPosition(position);
+            String title = presenterFeedListContractor.getPostItemTitleByPosition(position);
             feedViewHolder.setPostImage(url);
             feedViewHolder.setPostTitle(title);
             feedViewHolder.setOnItemClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (onItemClickListener != null) {
+                        PostList.Item postItem = presenterFeedListContractor.getPostItemByPosition(position);
                         onItemClickListener.onPostItemClick(feedViewHolder, postItem, position);
                     }
                 }
             });
         }
-    }
-
-    private String getPostImageUrl(PostList.Item postItem) {
-        List<PostList.Image> imageList = postItem.getImageList();
-        if (imageList != null && imageList.size() > 0) {
-            return imageList.get(0).getUrl();
-        }
-        return null;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -68,7 +67,17 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return (postItemList != null) ? postItemList.size() : 0;
+        return presenterFeedListContractor.getPostItemCount();
+    }
+
+    @Override
+    public void setPresenter(FeedListContractor.Presenter presenter) {
+        this.presenterFeedListContractor = presenter;
+    }
+
+    @Override
+    public void updateData() {
+        notifyDataSetChanged();
     }
 
     public interface OnItemClickListener {
