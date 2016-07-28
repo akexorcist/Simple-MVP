@@ -54,7 +54,6 @@ public class FeedItemAdapter extends FragmentStatePagerAdapter implements FeedIt
         return null;
     }
 
-
     @Override
     public int getCount() {
         return 5;
