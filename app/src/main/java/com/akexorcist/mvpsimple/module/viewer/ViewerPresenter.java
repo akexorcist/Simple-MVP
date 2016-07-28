@@ -38,7 +38,12 @@ public class ViewerPresenter implements ViewerContractor.Presenter {
     }
 
     @Override
-    public void onButtonAddClicked() {
+    public void onButtonNextClicked() {
+
+    }
+
+    @Override
+    public void onButtonPreviousClicked() {
 
     }
 }

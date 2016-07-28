@@ -14,7 +14,8 @@ import org.parceler.Parcels;
 public class ViewerActivity extends AppCompatActivity implements ViewerContractor.View, View.OnClickListener {
     public static final String KEY_POST_ITEM = "key_post_item";
     private ViewerContractor.Presenter presenterViewerContractor;
-    private Button btnAdd;
+    private Button btnNext;
+    private Button btnPrevious;
     private ViewPager vpFeedViewer;
     private FeedItemPagerAdapter feedItemPagerAdapter;
 
@@ -74,12 +75,14 @@ public class ViewerActivity extends AppCompatActivity implements ViewerContracto
     }
 
     public void bindView() {
-        btnAdd = (Button) findViewById(R.id.btn_add);
+        btnNext = (Button) findViewById(R.id.btn_next);
+        btnPrevious = (Button) findViewById(R.id.btn_previous);
         vpFeedViewer = (ViewPager) findViewById(R.id.vp_feed_viewer);
     }
 
     public void setupView() {
-        btnAdd.setOnClickListener(this);
+        btnNext.setOnClickListener(this);
+        btnPrevious.setOnClickListener(this);
 
         feedItemPagerAdapter = new FeedItemPagerAdapter(getSupportFragmentManager());
 //        vpFeedViewer.setAdapter(feedItemPagerAdapter);
@@ -87,8 +90,10 @@ public class ViewerActivity extends AppCompatActivity implements ViewerContracto
 
     @Override
     public void onClick(View view) {
-        if (view == btnAdd) {
-            presenterViewerContractor.onButtonAddClicked();
+        if (view == btnNext) {
+            presenterViewerContractor.onButtonNextClicked();
+        } else if (view == btnPrevious) {
+            presenterViewerContractor.onButtonPreviousClicked();
         }
     }
 

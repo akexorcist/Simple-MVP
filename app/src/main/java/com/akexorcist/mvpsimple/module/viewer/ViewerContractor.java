@@ -16,7 +16,9 @@ public class ViewerContractor {
     public interface Presenter extends BasePresenter {
         void setPostItem(PostList.Item postItem);
 
-        void onButtonAddClicked();
+        void onButtonNextClicked();
+
+        void onButtonPreviousClicked();
     }
 
 }
