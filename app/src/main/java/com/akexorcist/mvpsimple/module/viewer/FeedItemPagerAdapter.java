@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.akexorcist.mvpsimple.module.viewer.header.FeedImageHeaderFragment;
+import com.akexorcist.mvpsimple.module.viewer.header.FeedHeaderFragment;
 import com.akexorcist.mvpsimple.module.viewer.info.FeedInfoFragment;
 import com.akexorcist.mvpsimple.network.model.PostList;
 
@@ -27,7 +27,7 @@ public class FeedItemPagerAdapter extends FragmentStatePagerAdapter {
         if (position == 0) {
             return FeedInfoFragment.newInstance(postItem);
         } else if (position == 1) {
-            return FeedImageHeaderFragment.newInstance();
+            return FeedHeaderFragment.newInstance();
         }
         return null;
     }

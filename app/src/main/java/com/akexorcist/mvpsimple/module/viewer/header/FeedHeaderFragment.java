@@ -9,15 +9,15 @@ import android.view.ViewGroup;
 
 import com.akexorcist.mvpsimple.R;
 
-public class FeedImageHeaderFragment extends Fragment {
+public class FeedHeaderFragment extends Fragment {
 
 
-    public static FeedImageHeaderFragment newInstance() {
-        FeedImageHeaderFragment fragment = new FeedImageHeaderFragment();
+    public static FeedHeaderFragment newInstance() {
+        FeedHeaderFragment fragment = new FeedHeaderFragment();
         return fragment;
     }
 
-    public FeedImageHeaderFragment() {
+    public FeedHeaderFragment() {
 
     }
 
