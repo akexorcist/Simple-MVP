@@ -38,7 +38,9 @@ public class FeedHeaderPresenter implements FeedHeaderContractor.Presenter {
     @Override
     public void setPostItem(PostList.Item postItem) {
         this.postItem = postItem;
-        viewFeedHeaderContractor.setImageHeader(getPostImageUrl(postItem));
+        if(postItem != null) {
+            viewFeedHeaderContractor.setImageHeader(getPostImageUrl(postItem));
+        }
     }
 
     @Override

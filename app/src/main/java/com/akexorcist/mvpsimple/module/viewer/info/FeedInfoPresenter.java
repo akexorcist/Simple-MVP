@@ -36,7 +36,9 @@ public class FeedInfoPresenter implements FeedInfoContractor.Presenter {
     @Override
     public void setPostItem(PostList.Item postItem) {
         this.postItem = postItem;
-        viewFeedInfoContractor.setFeedItemTitle(postItem.getTitle());
+        if(postItem != null) {
+            viewFeedInfoContractor.setFeedItemTitle(postItem.getTitle());
+        }
     }
 
     @Override
