@@ -19,6 +19,8 @@ import com.akexorcist.mvpsimple.utility.AnimationManager;
 
 import org.parceler.Parcels;
 
+import java.util.List;
+
 public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedListAdapter.OnItemClickListener, View.OnClickListener {
     private static final String KEY_POST_LIST = "key_post_list";
     private FeedContractor.Presenter presenterFeedContractor;
@@ -69,7 +71,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     private void restoreView() {
-        updatePostList();
+
     }
 
     private void restoreArgument(Bundle bundle) {
@@ -101,8 +103,8 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     @Override
-    public void updatePostList() {
-        feedListAdapter.setPostItemList(presenterFeedContractor.getPostItemList());
+    public void updatePostItemList(List<PostList.Item> postItemList) {
+        feedListAdapter.setPostItemList(postItemList);
     }
 
     @Override

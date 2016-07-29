@@ -6,8 +6,6 @@ import com.akexorcist.mvpsimple.network.model.PostList;
 import com.akexorcist.mvpsimple.network.model.ResultFailureEvent;
 import com.squareup.otto.Subscribe;
 
-import java.util.List;
-
 /**
  * Created by Akexorcist on 7/10/16 AD.
  */
@@ -46,11 +44,6 @@ public class FeedPresenter implements FeedContractor.Presenter {
     }
 
     @Override
-    public List<PostList.Item> getPostItemList() {
-        return postList != null ? postList.getItemList() : null;
-    }
-
-    @Override
     public PostList getPostList() {
         return postList;
     }
@@ -59,6 +52,7 @@ public class FeedPresenter implements FeedContractor.Presenter {
     public void setPostList(PostList postList, boolean noAnimation) {
         if (postList != null) {
             this.postList = postList;
+            viewFeedContractor.updatePostItemList(postList.getItemList());
             viewFeedContractor.hideLoading(noAnimation);
         } else {
             viewFeedContractor.showLoading(noAnimation);
@@ -78,7 +72,6 @@ public class FeedPresenter implements FeedContractor.Presenter {
     @Subscribe
     public void onPostListResult(PostList postList) {
         setPostList(postList, false);
-        viewFeedContractor.updatePostList();
     }
 
     @Subscribe

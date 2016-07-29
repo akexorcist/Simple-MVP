@@ -14,8 +14,6 @@ public class FeedContractor {
     public interface Presenter extends BasePresenter {
         void loadPostList();
 
-        List<PostList.Item> getPostItemList();
-
         PostList getPostList();
 
         void setPostList(PostList postList, boolean noAnimation);
@@ -26,7 +24,7 @@ public class FeedContractor {
     }
 
     public interface View extends BaseView<Presenter> {
-        void updatePostList();
+        void updatePostItemList(List<PostList.Item> postItemList);
 
         void showPostListLoadingFailure();
 
