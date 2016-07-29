@@ -8,11 +8,11 @@ import com.akexorcist.mvpsimple.common.BaseView;
  */
 public class FeedLoadingContractor {
 
-    public interface View extends BaseView<Presenter> {
+    public interface Presenter extends BasePresenter {
 
     }
 
-    public interface Presenter extends BasePresenter {
+    public interface View extends BaseView<Presenter> {
 
     }
 }

@@ -9,13 +9,13 @@ import com.akexorcist.mvpsimple.network.model.PostList;
  */
 public class FeedInfoContractor {
 
-    public interface View extends BaseView<Presenter> {
-        void setFeedItemTitle(String title);
-    }
-
     public interface Presenter extends BasePresenter {
         void setPostItem(PostList.Item postItem);
 
         PostList.Item getPostItem();
+    }
+
+    public interface View extends BaseView<Presenter> {
+        void setFeedItemTitle(String title);
     }
 }

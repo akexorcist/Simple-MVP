@@ -9,14 +9,6 @@ import com.akexorcist.mvpsimple.network.model.PostList;
  */
 public class ViewerContractor {
 
-    public interface View extends BaseView<Presenter> {
-        void setFeedItemAdapter(PostList.Item postItem);
-
-        void nextFeedItem();
-
-        void previousFeedItem();
-    }
-
     public interface Presenter extends BasePresenter {
         void setPostItem(PostList.Item postItem);
 
@@ -25,4 +17,11 @@ public class ViewerContractor {
         void onButtonPreviousClicked();
     }
 
+    public interface View extends BaseView<Presenter> {
+        void setFeedItemAdapter(PostList.Item postItem);
+
+        void nextFeedItem();
+
+        void previousFeedItem();
+    }
 }

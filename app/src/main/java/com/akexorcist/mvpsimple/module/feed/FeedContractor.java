@@ -11,18 +11,6 @@ import java.util.List;
  */
 public class FeedContractor {
 
-    public interface View extends BaseView<Presenter> {
-        void updatePostList();
-
-        void showPostListLoadingFailure();
-
-        void showLoading(boolean noAnimation);
-
-        void hideLoading(boolean noAnimation);
-
-        void goToFeedViewerActivity(PostList.Item postItem);
-    }
-
     public interface Presenter extends BasePresenter {
         void loadPostList();
 
@@ -35,6 +23,18 @@ public class FeedContractor {
         void onItemClick(PostList.Item postItem, int position);
 
         long getAnimationDuration(boolean noAnimation);
+    }
+
+    public interface View extends BaseView<Presenter> {
+        void updatePostList();
+
+        void showPostListLoadingFailure();
+
+        void showLoading(boolean noAnimation);
+
+        void hideLoading(boolean noAnimation);
+
+        void goToFeedViewerActivity(PostList.Item postItem);
     }
 
 }
