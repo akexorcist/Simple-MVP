@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.akexorcist.mvpsimple.R;
-import com.akexorcist.mvpsimple.module.feed.FeedViewHolder;
 import com.akexorcist.mvpsimple.network.model.PostList;
 
 import java.util.List;
