@@ -39,6 +39,7 @@ public class BlogInfoPresenter implements BlogInfoContractor.Presenter {
     @Override
     public void loadBlogInfo() {
         NetworkManager.getInstance().getBlogInfo();
+        viewWriterInfoContractor.showLoading(true);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class BlogInfoPresenter implements BlogInfoContractor.Presenter {
     }
 
     @Override
-    public void setBlogInfo(BlogInfo blogInfo) {
+    public void setBlogInfo(BlogInfo blogInfo, boolean noAnimation) {
         this.blogInfo = blogInfo;
         if (blogInfo != null) {
             String id = blogInfo.getId();
@@ -60,12 +61,20 @@ public class BlogInfoPresenter implements BlogInfoContractor.Presenter {
             viewWriterInfoContractor.setBlogDescription(description);
             viewWriterInfoContractor.setBlogUrl(url);
             viewWriterInfoContractor.setBlogPostCount(postCount);
+            viewWriterInfoContractor.hideLoading(noAnimation);
+        } else {
+            viewWriterInfoContractor.showLoading(noAnimation);
         }
+    }
+
+    @Override
+    public long getAnimationDuration(boolean noAnimation) {
+        return noAnimation ? 0 : -1;
     }
 
     @Subscribe
     public void onBlogInfoResult(BlogInfo blogInfo) {
-        setBlogInfo(blogInfo);
+        setBlogInfo(blogInfo, false);
     }
 
     @Subscribe

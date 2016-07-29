@@ -2,11 +2,14 @@ package com.akexorcist.mvpsimple.module.writer;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.mvpsimple.R;
 import com.akexorcist.mvpsimple.network.model.BlogInfo;
+import com.akexorcist.mvpsimple.utility.AnimationManager;
 
 import org.parceler.Parcels;
 
@@ -18,6 +21,8 @@ public class BlogInfoActivity extends AppCompatActivity implements BlogInfoContr
     private TextView tvBlogDescription;
     private TextView tvBlogUrl;
     private TextView tvBlogPostCount;
+    private LinearLayout layoutBlogInfoContainer;
+    private LinearLayout layoutLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class BlogInfoActivity extends AppCompatActivity implements BlogInfoContr
         tvBlogDescription = (TextView) findViewById(R.id.tv_blog_description);
         tvBlogUrl = (TextView) findViewById(R.id.tv_blog_url);
         tvBlogPostCount = (TextView) findViewById(R.id.tv_blog_post_count);
+        layoutBlogInfoContainer = (LinearLayout) findViewById(R.id.layout_blog_info_container);
+        layoutLoading = (LinearLayout) findViewById(R.id.layout_loading);
     }
 
     private void setupView() {
@@ -53,7 +60,7 @@ public class BlogInfoActivity extends AppCompatActivity implements BlogInfoContr
     }
 
     private void restoreInstanceState(Bundle savedInstanceState) {
-        presenterWriterInfoContractor.setBlogInfo((BlogInfo) Parcels.unwrap(savedInstanceState.getParcelable(KEY_BLOG_INFO)));
+        presenterWriterInfoContractor.setBlogInfo((BlogInfo) Parcels.unwrap(savedInstanceState.getParcelable(KEY_BLOG_INFO)), true);
     }
 
     private void restoreView() {
@@ -118,5 +125,27 @@ public class BlogInfoActivity extends AppCompatActivity implements BlogInfoContr
     @Override
     public void showPostListLoadingFailure() {
         Toast.makeText(this, R.string.service_unavailable, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoading(boolean noAnimation) {
+        applyViewFadeIn(layoutLoading, noAnimation);
+        applyViewFadeOut(layoutBlogInfoContainer, noAnimation);
+    }
+
+    @Override
+    public void hideLoading(boolean noAnimation) {
+        applyViewFadeOut(layoutLoading, noAnimation);
+        applyViewFadeIn(layoutBlogInfoContainer, noAnimation);
+    }
+
+    private void applyViewFadeIn(View view, boolean noAnimation) {
+        long duration = presenterWriterInfoContractor.getAnimationDuration(noAnimation);
+        AnimationManager.getInstance().applyViewFadeIn(view, duration);
+    }
+
+    private void applyViewFadeOut(final View view, boolean noAnimation) {
+        long duration = presenterWriterInfoContractor.getAnimationDuration(noAnimation);
+        AnimationManager.getInstance().applyViewFadeOut(view, duration);
     }
 }

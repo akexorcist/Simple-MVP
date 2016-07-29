@@ -13,7 +13,9 @@ public class BlogInfoContractor {
 
         BlogInfo getBlogInfo();
 
-        void setBlogInfo(BlogInfo blogInfo);
+        void setBlogInfo(BlogInfo blogInfo, boolean noAnimation);
+
+        long getAnimationDuration(boolean noAnimation);
     }
 
     public interface View extends BaseView<Presenter> {
@@ -27,7 +29,10 @@ public class BlogInfoContractor {
 
         void setBlogPostCount(String postCount);
 
-
         void showPostListLoadingFailure();
+
+        void showLoading(boolean noAnimation);
+
+        void hideLoading(boolean noAnimation);
     }
 }
