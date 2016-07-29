@@ -21,7 +21,7 @@ import org.parceler.Parcels;
 
 public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedListAdapter.OnItemClickListener, View.OnClickListener {
     private static final String KEY_POST_LIST = "key_post_list";
-    private FeedContractor.Presenter feedPresenter;
+    private FeedContractor.Presenter presenterFeedContractor;
     private Button btnBlogInfo;
     private RecyclerView rvPostList;
     private FeedListAdapter feedListAdapter;
@@ -65,7 +65,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     private void restoreInstanceState(Bundle savedInstanceState) {
-        feedPresenter.setPostList((PostList) Parcels.unwrap(savedInstanceState.getParcelable(KEY_POST_LIST)), true);
+        presenterFeedContractor.setPostList((PostList) Parcels.unwrap(savedInstanceState.getParcelable(KEY_POST_LIST)), true);
     }
 
     private void restoreView() {
@@ -77,32 +77,32 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     private void initialize() {
-        feedPresenter.loadPostList();
+        presenterFeedContractor.loadPostList();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(KEY_POST_LIST, Parcels.wrap(feedPresenter.getPostList()));
+        outState.putParcelable(KEY_POST_LIST, Parcels.wrap(presenterFeedContractor.getPostList()));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        feedPresenter.start();
+        presenterFeedContractor.start();
         feedListAdapter.onStart();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        feedPresenter.stop();
+        presenterFeedContractor.stop();
         feedListAdapter.onStop();
     }
 
     @Override
     public void updatePostList() {
-        feedListAdapter.setPostItemList(feedPresenter.getPostItemList());
+        feedListAdapter.setPostItemList(presenterFeedContractor.getPostItemList());
     }
 
     @Override
@@ -131,22 +131,22 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
 
     @Override
     public void setPresenter(FeedContractor.Presenter presenter) {
-        this.feedPresenter = presenter;
+        this.presenterFeedContractor = presenter;
     }
 
     private void applyViewFadeIn(View view, boolean noAnimation) {
-        long duration = feedPresenter.getAnimationDuration(noAnimation);
+        long duration = presenterFeedContractor.getAnimationDuration(noAnimation);
         AnimationManager.getInstance().applyViewFadeIn(view, duration);
     }
 
     private void applyViewFadeOut(final View view, boolean noAnimation) {
-        long duration = feedPresenter.getAnimationDuration(noAnimation);
+        long duration = presenterFeedContractor.getAnimationDuration(noAnimation);
         AnimationManager.getInstance().applyViewFadeOut(view, duration);
     }
 
     @Override
     public void onPostItemClick(RecyclerView.ViewHolder viewHolder, PostList.Item postItem, int i) {
-        feedPresenter.onItemClick(postItem, i);
+        presenterFeedContractor.onItemClick(postItem, i);
     }
 
     @Override
