@@ -12,5 +12,4 @@
     <dimen name="global_text_size_extra_large">20sp</dimen>
 
     <dimen name="view_post_simple_image_height">150dp</dimen>
-    <dimen name="view_post_simple_image_height">150dp</dimen>
 </resources>

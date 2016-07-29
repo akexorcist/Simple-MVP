@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/global_margin_padding_extra_large"
+    android:paddingLeft="@dimen/global_margin_padding_extra_large"
+    android:paddingRight="@dimen/global_margin_padding_extra_large"
+    android:paddingTop="@dimen/global_margin_padding_extra_large"
+    tools:context=".module.writer.BlogInfoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/blog_id"
+        android:textSize="@dimen/global_text_size_large" />
+
+    <TextView
+        android:id="@+id/tv_blog_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textSize="@dimen/global_text_size_small" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/global_margin_padding"
+        android:text="@string/blog_name"
+        android:textSize="@dimen/global_text_size_large" />
+
+    <TextView
+        android:id="@+id/tv_blog_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textSize="@dimen/global_text_size_small" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/global_margin_padding"
+        android:text="@string/blog_description"
+        android:textSize="@dimen/global_text_size_large" />
+
+    <TextView
+        android:id="@+id/tv_blog_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textSize="@dimen/global_text_size_small" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/global_margin_padding"
+        android:text="@string/blog_url"
+        android:textSize="@dimen/global_text_size_large" />
+
+    <TextView
+        android:id="@+id/tv_blog_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textSize="@dimen/global_text_size_small" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/global_margin_padding"
+        android:text="@string/blog_post_count"
+        android:textSize="@dimen/global_text_size_large" />
+
+    <TextView
+        android:id="@+id/tv_blog_post_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textSize="@dimen/global_text_size_small" />
+
+</LinearLayout>

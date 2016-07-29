@@ -1,5 +1,6 @@
 package com.akexorcist.mvpsimple.network;
 
+import com.akexorcist.mvpsimple.network.model.BlogInfo;
 import com.akexorcist.mvpsimple.network.model.PostList;
 
 import retrofit2.Call;
@@ -18,4 +19,7 @@ public interface NetworkService {
                                @Query("fetchBodies") boolean isFetchBodies,
                                @Query("fetchImages") boolean isFetchImages);
 
+    @GET(Url.GET_BLOG_INFO)
+    Call<BlogInfo> getBlogInfo(@Path("blogId") String blogId,
+                               @Query("key") String key);
 }

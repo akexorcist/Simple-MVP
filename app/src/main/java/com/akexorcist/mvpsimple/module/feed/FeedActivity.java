@@ -6,21 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.akexorcist.mvpsimple.R;
 import com.akexorcist.mvpsimple.module.feed.adapter.FeedListAdapter;
 import com.akexorcist.mvpsimple.module.viewer.ViewerActivity;
+import com.akexorcist.mvpsimple.module.writer.BlogInfoActivity;
 import com.akexorcist.mvpsimple.network.model.PostList;
 import com.akexorcist.mvpsimple.utility.AnimationManager;
 
 import org.parceler.Parcels;
 
-public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedListAdapter.OnItemClickListener {
+public class FeedActivity extends AppCompatActivity implements FeedContractor.View, FeedListAdapter.OnItemClickListener, View.OnClickListener {
     private static final String KEY_POST_LIST = "key_post_list";
     private FeedContractor.Presenter feedPresenter;
-
+    private Button btnBlogInfo;
     private RecyclerView rvPostList;
     private FeedListAdapter feedListAdapter;
     private LinearLayout layoutLoading;
@@ -44,11 +46,13 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     }
 
     private void bindView() {
+        btnBlogInfo = (Button) findViewById(R.id.btn_blog_info);
         rvPostList = (RecyclerView) findViewById(R.id.rv_post_list);
         layoutLoading = (LinearLayout) findViewById(R.id.layout_loading);
     }
 
     private void setupView() {
+        btnBlogInfo.setOnClickListener(this);
         feedListAdapter = new FeedListAdapter();
         feedListAdapter.setOnItemClickListener(this);
         rvPostList.setAdapter(feedListAdapter);
@@ -143,5 +147,17 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
     @Override
     public void onPostItemClick(RecyclerView.ViewHolder viewHolder, PostList.Item postItem, int i) {
         feedPresenter.onItemClick(postItem, i);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == btnBlogInfo) {
+            goToBlogInfo();
+        }
+    }
+
+    private void goToBlogInfo() {
+        Intent intent = new Intent(this, BlogInfoActivity.class);
+        startActivity(intent);
     }
 }

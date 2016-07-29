@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
+    android:orientation="vertical"
     tools:context=".module.feed.FeedActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_post_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <include layout="@layout/view_loading" />
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_post_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include layout="@layout/view_loading" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_blog_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/blog_info"
+        android:textSize="@dimen/global_text_size" />
+
+</LinearLayout>

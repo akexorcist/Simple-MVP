@@ -9,4 +9,10 @@
     <string name="next">Next</string>
     <string name="post_id">Post ID</string>
     <string name="post_url">Post URL</string>
+    <string name="blog_id">Blog ID</string>
+    <string name="blog_name">Blog Name</string>
+    <string name="blog_description">Blog Description</string>
+    <string name="blog_url">Blog URL</string>
+    <string name="blog_post_count">Blog Post Count</string>
+    <string name="blog_info">Blog Info</string>
 </resources>
