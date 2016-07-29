@@ -72,7 +72,7 @@ public class FeedActivity extends AppCompatActivity implements FeedContractor.Vi
         updatePostList();
     }
 
-    private void restoreArgument(Bundle extras) {
+    private void restoreArgument(Bundle bundle) {
 
     }
 
